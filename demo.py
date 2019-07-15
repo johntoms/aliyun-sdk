@@ -15,4 +15,6 @@ ak = {
 }
 aliyun_client = client.AliyunClient(ak)
 response = aliyun_client.common('ecs', Action='DescribeRegions')
+
+# response (status_code, results)
 print(response)

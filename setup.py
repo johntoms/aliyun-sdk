@@ -5,8 +5,9 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="aliyun-sdk",
-    version="0.0.1",
+    version="0.0.2",
     author="JohnToms",
+    license='MIT',
     author_email="johntoms@163.com",
     description="sdk for aliyun",
     long_description=long_description,
@@ -22,7 +23,7 @@ setuptools.setup(
         'urllib3>=1.25.3',
         'xmltodict>=0.12.0'
     ],
-    packages=setuptools.find_packages('aliyun_sdk'),
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

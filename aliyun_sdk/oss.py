@@ -1,10 +1,11 @@
+
+# BuildIn Packages
 import base64
-# Build-in Modules
 import datetime
 import hashlib
 import hmac
 
-# 3rd-part Modules
+# Part3 Packages
 import requests
 
 # Project Modules

@@ -4,6 +4,10 @@
 ## 目前支持的产品
 > 已适配的阿里云产品及 API 接口详情
 
+## 功能介绍
+1. 支持主流的阿里云产品。
+2.  加入 `请求超时` 自动重新请求，上限 3 次。
+
 **产品限制：**
 - 该接口仅适用于`少次`、`不频繁`、`低速`,其他限制及详细说明，请参考[阿里云官方文档](https://aliyun.com)
 - 具体传参请参考官方文档。
@@ -44,6 +48,12 @@ ak = {
     "AccessKeySecret": "example"
 }
 aliyun_client = client.AliyunClient(ak)
-response = aliyun_client.common('ecs', Action='DescribeRegions')
-print(response)
+status_code, response = aliyun_client.common('ecs', Action='DescribeRegions')
+
+# response ==> (status_code, result)
+print(status_code, response)
+
+# example result
+# (404, {'Recommend': 'https://error-center.aliyun.com/status/search?Keyword=InvalidAccessKeyId.NotFound&source=PopGw', 'Message': 'Specified access key is not found.', 'RequestId': 'AEA6AEB8-6F44-445B-Bd0E-9E5F706B5665', 'HostId': 'ecs.aliyuncs.com', 'Code': 'InvalidAccessKeyId.NotFound'})
+
 ```

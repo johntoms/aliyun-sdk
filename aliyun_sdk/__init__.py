@@ -1,9 +1,9 @@
-# Build-in Modules
+# BuildIn Packages
 import json
 
-import requests
-# 3rd-part Modules
+# Part3 Packages
 import xmltodict
+import requests
 from retry import retry
 
 retry_for_requests = retry((requests.ConnectionError, requests.Timeout), tries=3, delay=1, backoff=2, jitter=(1, 2))

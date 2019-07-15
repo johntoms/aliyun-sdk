@@ -163,9 +163,9 @@ PRODUCT_API_CONFIG_MAP = {
 
 def percent_encode(string):
     if string is None:
-        raise Exception('AccessKeyId or AccessKeySecret is None')
+        raise Exception('params is None')
     if not isinstance(string, (str, bytes, int)):
-        raise TypeError('AccessKeyId or AccessKeySecret should be String')
+        raise TypeError('params TypeError')
     if isinstance(string, bytes):
         string.decode('utf-8')
     elif isinstance(string, int):
