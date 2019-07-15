@@ -11,7 +11,7 @@ setuptools.setup(
     description="sdk for aliyun",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/johntoms/aliyun-sdk",
     install_requires=[
         'certifi>=2019.6.16',
         'chardet>=3.0.4',
@@ -22,7 +22,7 @@ setuptools.setup(
         'urllib3>=1.25.3',
         'xmltodict>=0.12.0'
     ],
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages('aliyun_sdk'),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
