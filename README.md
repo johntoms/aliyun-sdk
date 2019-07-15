@@ -1,6 +1,10 @@
 # aliyun_sdk
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 > 因为使用阿里云官方的 sdk 需要调用太多的包，而且写法上比较繁琐，故自己开发了一个比较简单的 sdk。
+## 安装方式
+```bash
+pip install zy-aliyun-python-sdk
+```
 ## 目前支持的产品
 > 已适配的阿里云产品及 API 接口详情
 
@@ -42,6 +46,7 @@ API 接口详情如下：
 
 ## example
 ```python
+# 非 oss 产品
 from aliyun_sdk import client
 ak = {
     "AccessKeyId":"example",
@@ -56,4 +61,9 @@ print(status_code, response)
 # example result
 # (404, {'Recommend': 'https://error-center.aliyun.com/status/search?Keyword=InvalidAccessKeyId.NotFound&source=PopGw', 'Message': 'Specified access key is not found.', 'RequestId': 'AEA6AEB8-6F44-445B-Bd0E-9E5F706B5665', 'HostId': 'ecs.aliyuncs.com', 'Code': 'InvalidAccessKeyId.NotFound'})
 
+# oss 产品
+status_code, oss_response = aliyun_client.oss('GET', **{"max-keys": 1000})
+print(status_code, oss_response)
+status_code, oss_response = aliyun_client.oss('GET', BucketName='cxp-test', Query={'acl': None})
+print(status_code, oss_response)
 ```
