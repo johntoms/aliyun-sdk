@@ -165,7 +165,7 @@ def percent_encode(string):
     if string is None:
         raise Exception('params is None')
     if not isinstance(string, (str, bytes, int)):
-        raise TypeError('params TypeError')
+        raise TypeError(str(string) + 'params TypeError')
     if isinstance(string, bytes):
         string.decode('utf-8')
     elif isinstance(string, int):
