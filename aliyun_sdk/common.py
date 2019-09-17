@@ -16,9 +16,23 @@ from . import parse_response
 """
 ==========================================================================================
 整理于 2019-04-16
+修改于 2019-09-16（by ruijie.qiao） 添加API STS请求验证功能
+请求参数案例1（默认AK传空值为STS Token验证方式，RoleName为空的默认值为ZhuyunFullReadOnlyAccess）:
+        'AccessKeyId': None,
+        'AccessKeySecret': None,
+        'RoleName': None,
+请求参数案例2（AK值不为空的时候，为普通的AK验证方式，这时候如果RoleName为非空，STS Token验证方式也不生效）:
+        'AccessKeyId': XXXXXXXXXXXXXX,
+        'AccessKeySecret': XXXXXXXXXXXXXX,
+        'RoleName': None,
+请求参数案例3（默认AK传空值为STS Token验证方式，RoleName不为空，RoleName为设置的值）:
+        'AccessKeyId': None,
+        'AccessKeySecret': None,
+        'RoleName': XXXXXXXXXXXXXX,
 ==========================================================================================
 """
 
+ROLE_URL = "http://100.100.100.200/latest/meta-data/ram/security-credentials/"
 PRODUCT_API_CONFIG_MAP = {
     'ecs': {
         'domain': 'ecs.aliyuncs.com',
@@ -186,9 +200,14 @@ class AliyunCommon(object):
     Aliyun common HTTP API
     '''
 
-    def __init__(self, access_key_id=None, access_key_secret=None, *args, **kwargs):
+    def __init__(self, access_key_id=None, access_key_secret=None, role_name=None, *args, **kwargs):
         self.access_key_id = access_key_id
         self.access_key_secret = access_key_secret
+        if role_name is None or role_name == "":
+            self.role_name = "ZhuyunFullReadOnlyAccess"
+        else:
+            self.role_name = role_name
+        self.security_token = None
 
     def sign(self, params_to_sign):
         canonicalized_query_string = ''
@@ -221,6 +240,18 @@ class AliyunCommon(object):
             'Timestamp': time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             'partner_id': '1.0',
         }
+
+        if self.access_key_id is None or self.access_key_secret is None or self.access_key_secret == "" or self.access_key_id == "":
+            resp_role = requests.get(ROLE_URL + self.role_name)
+            if resp_role.status_code == 200:
+                parsed_resp = parse_response(resp_role)
+                self.access_key_id = parsed_resp.get('AccessKeyId')
+                self.access_key_secret = parsed_resp.get('AccessKeySecret')
+                self.security_token = parsed_resp.get('SecurityToken')
+                api_params['AccessKeyId'] = self.access_key_id
+
+        if self.security_token:
+            api_params['SecurityToken'] = self.security_token
 
         api_params.update(biz_params)
         api_params['Signature'] = self.sign(api_params)

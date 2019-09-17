@@ -8,6 +8,7 @@ def get_config(c):
     return {
         'access_key_id': c.get('AccessKeyId'),
         'access_key_secret': c.get('AccessKeySecret'),
+        'role_name': c.get('RoleName'),
     }
 
 
@@ -27,3 +28,4 @@ class AliyunClient(object):
     @retry_for_requests
     def oss(self, method, timeout=10, **biz_params):
         return self.oss_client.__getattr__(method)(timeout=timeout, **biz_params)
+
