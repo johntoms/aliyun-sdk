@@ -15,8 +15,8 @@ GMT_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
 OSS_API_CONFIG = {
     'top_domain': 'aliyuncs.com',
     'version': '',
-    'port': 80,
-    'protocol': 'http'
+    'port': 443,
+    'protocol': 'https'
 }
 
 

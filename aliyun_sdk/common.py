@@ -37,50 +37,50 @@ PRODUCT_API_CONFIG_MAP = {
     'ecs': {
         'domain': 'ecs.aliyuncs.com',
         'version': '2014-05-26',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'rds': {
         'domain': 'rds.aliyuncs.com',
         'version': '2014-08-15',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'drds': {
         'domain': 'drds.aliyuncs.com',
         'version': '2015-04-13',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'slb': {
         'domain': 'slb.aliyuncs.com',
         'version': '2014-05-15',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'ess': {
         'domain': 'ess.aliyuncs.com',
         'version': '2014-08-28',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'mts': {
         'domain': 'mts.aliyuncs.com',
         'version': '2014-06-18',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'yundun': {
         'domain': 'yundun.aliyuncs.com',
         'version': '2014-09-24',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'cdn': {
         'domain': 'cdn.aliyuncs.com',
         'version': '2018-05-10',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'ram': {
         'domain': 'ram.aliyuncs.com',
@@ -91,56 +91,56 @@ PRODUCT_API_CONFIG_MAP = {
     'sts': {
         'domain': 'sts.aliyuncs.com',
         'version': '2015-04-01',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'dysms': {
         'domain': 'dysmsapi.aliyuncs.com',
         'version': '2017-05-25',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'dyvms': {
         'domain': 'dyvmsapi.aliyuncs.com',
         'version': '2017-05-25',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'dybase': {
         'domain': 'dybaseapi.aliyuncs.com',
         'version': '2017-05-25',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'redis': {
         'domain': 'r-kvstore.aliyuncs.com',
         'version': '2015-01-01',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'mongodb': {
         'domain': 'mongodb.aliyuncs.com',
         'version': '2015-12-01',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'dts': {
         'domain': 'dts.aliyuncs.com',
         'version': '2016-08-01',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'vpc': {
         'domain': 'vpc.aliyuncs.com',
         'version': '2016-04-28',
-        'port': 80,
-        'protocol': 'http'
+        'port': 443,
+        'protocol': 'https'
     },
     'cms': {
         'domain': 'metrics.aliyuncs.com',
         'version': '2019-01-01',
-        'port': 80,
-        'protocol': 'http',
+        'port': 443,
+        'protocol': 'https',
     },
     'waf': {
         'domain': 'wafopenapi.cn-hangzhou.aliyuncs.com',
