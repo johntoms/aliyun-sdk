@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="zy-aliyun-python-sdk",
-    version="0.0.6",
+    version="0.0.7",
     author="JohnToms",
     license='MIT',
     author_email="johntoms@163.com",
