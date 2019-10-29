@@ -172,6 +172,12 @@ PRODUCT_API_CONFIG_MAP = {
         'port': 443,
         'protocol': 'https',
     },
+    'avds':{
+        'domain': 'avds.aliyuncs.com',
+        'version': '2017-11-29',
+        'port': 443,
+        'protocol': 'https',
+    },
 }
 
 
