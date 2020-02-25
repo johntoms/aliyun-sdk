@@ -178,6 +178,18 @@ PRODUCT_API_CONFIG_MAP = {
         'port': 443,
         'protocol': 'https',
     },
+    'cbn':{
+        'domain': 'cbn.aliyuncs.com',
+        'version': '2017-09-12',
+        'port': 443,
+        'protocol': 'https',
+    },
+    'smartag':{
+        'domain': 'smartag.cn-hangzhou.aliyuncs.com',
+        'version': '2018-03-13',
+        'port': 443,
+        'protocol': 'https',
+    },
 }
 
 
