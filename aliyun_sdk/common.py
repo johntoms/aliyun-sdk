@@ -185,7 +185,7 @@ PRODUCT_API_CONFIG_MAP = {
         'protocol': 'https',
     },
     'smartag':{
-        'domain': 'smartag.cn-hangzhou.aliyuncs.com',
+        'domain': 'smartag.cn-shanghai.aliyuncs.com',
         'version': '2018-03-13',
         'port': 443,
         'protocol': 'https',
