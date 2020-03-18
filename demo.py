@@ -18,7 +18,7 @@ aliyun_client = client.AliyunClient(ak)
 
 
 # 非 oss 产品
-response = aliyun_client.common('ecs', Action='DescribeRegions')
+response = aliyun_client.common('polardb', Action='DescribeRegions')
 
 # response (status_code, results)
 print(response)

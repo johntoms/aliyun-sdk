@@ -190,6 +190,12 @@ PRODUCT_API_CONFIG_MAP = {
         'port': 443,
         'protocol': 'https',
     },
+    'polardb':{
+        'domain': 'polardb.aliyuncs.com',
+        'version': '2017-08-01',
+        'port': 443,
+        'protocol': 'https',
+    },
 }
 
 
