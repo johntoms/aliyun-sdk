@@ -3,15 +3,14 @@ import base64
 import hashlib
 import hmac
 import time
-from urllib.request import quote
 import uuid
+from urllib.request import quote
 
 # Part3   Packages
 import requests
 
 # Project Packages
 from . import parse_response
-
 
 """
 ==========================================================================================
@@ -126,7 +125,7 @@ PRODUCT_API_CONFIG_MAP = {
     },
     'dts': {
         'domain': 'dts.aliyuncs.com',
-        'version': '2016-08-01',
+        'version': '2020-01-01',
         'port': 443,
         'protocol': 'https'
     },
@@ -166,32 +165,44 @@ PRODUCT_API_CONFIG_MAP = {
         'port': 443,
         'protocol': 'https',
     },
-    'ddoscoo':{
+    'ddoscoo': {
         'domain': 'ddoscoo.cn-hangzhou.aliyuncs.com',
         'version': '2017-12-28',
         'port': 443,
         'protocol': 'https',
     },
-    'avds':{
+    'avds': {
         'domain': 'avds.aliyuncs.com',
         'version': '2017-11-29',
         'port': 443,
         'protocol': 'https',
     },
-    'cbn':{
+    'cbn': {
         'domain': 'cbn.aliyuncs.com',
         'version': '2017-09-12',
         'port': 443,
         'protocol': 'https',
     },
-    'smartag':{
+    'smartag': {
         'domain': 'smartag.cn-shanghai.aliyuncs.com',
         'version': '2018-03-13',
         'port': 443,
         'protocol': 'https',
     },
-    'polardb':{
+    'polardb': {
         'domain': 'polardb.aliyuncs.com',
+        'version': '2017-08-01',
+        'port': 443,
+        'protocol': 'https',
+    },
+    'arms': {
+        'domain': 'arms.[RegionId].aliyuncs.com',
+        'version': '2019-08-08',
+        'port': 443,
+        'protocol': 'https',
+    },
+    'edas': {
+        'domain': 'edas.[RegionId].aliyuncs.com',
         'version': '2017-08-01',
         'port': 443,
         'protocol': 'https',
@@ -220,11 +231,10 @@ def percent_encode(string):
 
 
 class AliyunCommon(object):
-    '''
-    Aliyun common HTTP API
-    '''
+    """Aliyun common HTTP API"""
 
-    def __init__(self, access_key_id=None, access_key_secret=None, role_name=None, *args, **kwargs):
+    def __init__(self, access_key_id=None, access_key_secret=None, role_name=None,
+                 *args, **kwargs):
         self.access_key_id = access_key_id
         self.access_key_secret = access_key_secret
         if role_name is None or role_name == "":
@@ -236,15 +246,18 @@ class AliyunCommon(object):
     def sign(self, params_to_sign):
         canonicalized_query_string = ''
 
-        sorted_params = sorted(params_to_sign.items(), key=lambda kv_pair: kv_pair[0])
+        sorted_params = sorted(params_to_sign.items(),
+                               key=lambda kv_pair: kv_pair[0])
         for k, v in sorted_params:
-            canonicalized_query_string += percent_encode(k) + '=' + percent_encode(v) + '&'
+            canonicalized_query_string += percent_encode(k) + '=' + percent_encode(
+                v) + '&'
 
         canonicalized_query_string = canonicalized_query_string[:-1]
 
         string_to_sign = 'POST&%2F&' + percent_encode(canonicalized_query_string)
 
-        h = hmac.new(bytes(self.access_key_secret + "&", 'utf-8'), bytes(string_to_sign, 'utf-8'), hashlib.sha1)
+        h = hmac.new(bytes(self.access_key_secret + "&", 'utf-8'),
+                     bytes(string_to_sign, 'utf-8'), hashlib.sha1)
         signature = base64.encodebytes(h.digest()).strip()
 
         return signature
@@ -253,7 +266,8 @@ class AliyunCommon(object):
         status_code, _ = self.ecs(Action='DescribeRegions')
         return (status_code == 200)
 
-    def call(self, domain, version, port=80, protocol='http', timeout=3, **biz_params):
+    def call(self, domain, version, port=80, protocol='http', timeout=3,
+             **biz_params):
         api_params = {
             'Format': 'json',
             'Version': version,
@@ -291,15 +305,25 @@ class AliyunCommon(object):
         api_config = PRODUCT_API_CONFIG_MAP.get(product)
 
         if not api_config:
-            raise Exception('Unknow Aliyun product API config. Please use `call()` with full API configs.')
-
+            raise Exception(
+                'Unknow Aliyun product API config.'
+                ' Please use `call()` with full API configs.')
         domain = api_config.get('domain')
         version = api_config.get('version')
         port = api_config.get('port')
         protocol = api_config.get('protocol')
 
         def f(timeout=3, **biz_params):
-            return self.call(domain=domain, version=version, port=port, protocol=protocol, timeout=timeout,
+            nonlocal domain
+            if '[RegionId]' in domain:
+                _RegionId = biz_params.get('RegionId')
+                if not _RegionId:
+                    raise TypeError('Uncatched RegionId ,'
+                                    'this API config must RegionId.')
+                biz_params.pop('RegionId')
+                domain = domain.replace('[RegionId]', biz_params['RegionId'])
+            return self.call(domain=domain, version=version, port=port,
+                             protocol=protocol, timeout=timeout,
                              **biz_params)
 
         return f
