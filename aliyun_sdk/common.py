@@ -321,7 +321,7 @@ class AliyunCommon(object):
                     raise TypeError('Uncatched RegionId ,'
                                     'this API config must RegionId.')
                 biz_params.pop('RegionId')
-                domain = domain.replace('[RegionId]', biz_params['RegionId'])
+                domain = domain.replace('[RegionId]', _RegionId)
             return self.call(domain=domain, version=version, port=port,
                              protocol=protocol, timeout=timeout,
                              **biz_params)
